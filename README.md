@@ -16,3 +16,8 @@ pip install requests
 pip install websocket-client
 python bot.py &
 ```
+
+#Heroku
+Deploy with a click supported now
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
