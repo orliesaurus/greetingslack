@@ -8,7 +8,6 @@
   ],
   "website": "https://github.com/orliesaurus/greetingslack",
   "repository": "https://github.com/orliesaurus/greetingslack",
-  "logo": "none",
   "env": {
     "SLACK-TOKEN": {
       "description": "Your Slack API Token",
