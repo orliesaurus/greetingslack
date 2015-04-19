@@ -1,6 +1,6 @@
 {
-  "name": "GreetingSlack"
-  "description": "This app connects to your slack team and greets new joiners with a custom msg"
+  "name": "GreetingSlack",
+  "description": "This app connects to your slack team and greets new joiners with a custom msg",
   "keywords": [
     "productivity",
     "Slack",
@@ -13,12 +13,11 @@
     "SLACK-TOKEN": {
       "description": "Your Slack API Token",
       "value": "1234-12314123123-123123123",
-      "required": true
+      "required": "true"
     },
     "WELCOME-MESSAGE": {
       "description": "Your Welcome message string",
       "value": "A personalized welcome msg that is broadcasted to your Slack Users"	
-}
+	}
   }
-    
 }
