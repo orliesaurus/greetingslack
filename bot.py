@@ -2,10 +2,12 @@ import websocket
 import json
 import requests
 import urllib
-
+import os
 ###VARIABLES THAT YOU NEED TO SET##############################
-MESSAGE = "Hello and Welcome to our pretty Slack Network! :)"
-TOKEN = "YOUR-TOKEN"
+MESSAGE = os.environ['SLACK-TOKEN'] 
+
+TOKEN = os.environ['WELCOME-MESSAGE']
+
 ###############################################################
 
 def parse_join(message):
