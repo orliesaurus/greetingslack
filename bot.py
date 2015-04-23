@@ -3,11 +3,13 @@ import json
 import requests
 import urllib
 import os
-###VARIABLES THAT YOU NEED TO SET##############################
-MESSAGE = os.environ['SLACK-TOKEN'] 
-
-TOKEN = os.environ['WELCOME-MESSAGE']
-
+###VARIABLES THAT YOU NEED TO SET MANUALLY IF NOT ON HEROKU#####
+try:
+	MESSAGE = os.environ['SLACK-TOKEN'] 
+	TOKEN = os.environ['WELCOME-MESSAGE']
+except:
+	MESSAGE = 'Manually set the Message if youre not running through heroku or have not set vars in ENV'
+	TOKEN = 'Manually set the API Token if youre not running through heroku or have not set vars in ENV'
 ###############################################################
 
 def parse_join(message):
