@@ -22,3 +22,6 @@ Deploy with a click supported now
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
+Don't forget to scale your worker to 1 as below
+![Scale](https://dl.dropbox.com/s/stpnk04pi3l5cj4/Screenshot%202015-06-16%2011.35.25.png?dl=0)
+
