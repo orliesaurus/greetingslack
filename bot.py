@@ -3,6 +3,12 @@ import json
 import requests
 import urllib
 import os
+
+
+# Suppress InsecureRequestWarning
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
 ###VARIABLES THAT YOU NEED TO SET MANUALLY IF NOT ON HEROKU#####
 try:
 	MESSAGE = os.environ['WELCOME-MESSAGE'] 
