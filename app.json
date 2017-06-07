@@ -14,9 +14,13 @@
       "value": "1234-12314123123-123123123",
       "required": "true"
     },
+    "UNFURL": {
+      "description": "We UNFURL only the last link by default, trust me its good",
+      "value": "true"
+    },
     "WELCOME-MESSAGE": {
       "description": "Your Welcome message string",
-      "value": "A personalized welcome msg that is broadcasted to your Slack Users"	
-	}
+      "value": "A personalized welcome msg that is broadcasted to your Slack Users"
+    }
   }
 }
