@@ -32,7 +32,8 @@ Deploy with a click supported now
 
 # Q&A
 
-##Q1. How do you change the welcome message?
+## Q1. How do you change the welcome message?
 
-A1. To change the welcome message, edit your Heroku variables:
+## A1.
+To change the welcome message, edit your Heroku variables:
 Go to Heroku's Settings, then  where it says `Config Variables` click `Reveal Config Vars` and it will reveal your message and other fields.  This will restart your Heroku instance pretty quickly and apply the changes for you
