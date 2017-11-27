@@ -36,3 +36,10 @@ Deploy with a click supported now
 A1.
 To change the welcome message, edit your Heroku variables:
 Go to Heroku's Settings, then  where it says `Config Variables` click `Reveal Config Vars` and it will reveal your message and other fields.  This will restart your Heroku instance pretty quickly and apply the changes for you
+
+## Q2. How do I know if it worked?
+A2.
+After setting up the bot, your welcome message will be displayed to every new user, as soon as a they join your Slack network - as a direct message.
+Check the example below:
+
+![Example](https://i.snag.gy/YyOLfb.jpg)
