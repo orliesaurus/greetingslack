@@ -32,10 +32,21 @@ def parse_join(message):
         x = x.json()
         x = x["channel"]["id"]
         logging.debug(x)
+
+        data = {
+                'token': TOKEN,
+                'channel': x,
+                'text': MESSAGE,
+                'parse': 'full',
+                'as_user': 'true',
+                }
+
+        logging.debug(data)
+
         if (UNFURL.lower() == "false"):
-          xx = requests.post("https://slack.com/api/chat.postMessage?token="+TOKEN+"&channel="+x+"&text="+urllib.quote(MESSAGE)+"&parse=full&as_user=true&unfurl_links=false")
-        else:
-          xx = requests.post("https://slack.com/api/chat.postMessage?token="+TOKEN+"&channel="+x+"&text="+urllib.quote(MESSAGE)+"&parse=full&as_user=true")
+          data = data.update({'unfurl_link': 'false'})
+
+        xx = requests.post("https://slack.com/api/chat.postMessage", data=data)
         logging.debug('\033[91m' + "HELLO SENT TO " + m["user"]["id"] + '\033[0m')
 
 #Connects to Slacks and initiates socket handshake
