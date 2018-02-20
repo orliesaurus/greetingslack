@@ -19,16 +19,25 @@ try:
         MESSAGE = os.environ['WELCOME_MESSAGE']
         TOKEN = os.environ['SLACK_TOKEN']
         UNFURL = os.environ['UNFURL_LINKS']
+        DEBUG_CHANNEL_ID = os.environ.get('DEBUG_CHANNEL_ID', False)
 except:
         MESSAGE = 'Manually set the Message if youre not running through heroku or have not set vars in ENV'
         TOKEN = 'Manually set the API Token if youre not running through heroku or have not set vars in ENV'
         UNFURL = 'FALSE'
 ###############################################################
 
+def is_team_join(msg):
+    return msg['type'] == "team_join"
+
+def is_debug_channel_join(msg):
+    return msg['type'] == "member_joined_channel" and msg['channel'] == DEBUG_CHANNEL_ID and msg['channel_type'] == 'C'
+
 def parse_join(message):
     m = json.loads(message)
-    if (m['type'] == "team_join"):
-        x = requests.get("https://slack.com/api/im.open?token="+TOKEN+"&user="+m["user"]["id"])
+    if is_team_join(m) or is_debug_channel_join(m):
+        user_id = m["user"]["id"] if is_team_join(m) else m["user"]
+        logging.debug(m)
+        x = requests.get("https://slack.com/api/im.open?token="+TOKEN+"&user="+user_id)
         x = x.json()
         x = x["channel"]["id"]
         logging.debug(x)
