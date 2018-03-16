@@ -46,4 +46,4 @@ Check the example below:
 
 ## Q3. How do I enable the debug channel?
 A3.
-In the environment variables set DEBUG_CHANNEL_ID to be true. THat's usually achieved by using `export DEBUG_CHANNEL_ID=true`
+In the environment variables set DEBUG_CHANNEL_ID to be true. That's usually achieved by using `export DEBUG_CHANNEL_ID=true` in your CLI
