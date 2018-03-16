@@ -19,23 +19,43 @@ try:
         MESSAGE = os.environ['WELCOME_MESSAGE']
         TOKEN = os.environ['SLACK_TOKEN']
         UNFURL = os.environ['UNFURL_LINKS']
+        DEBUG_CHANNEL_ID = os.environ.get('DEBUG_CHANNEL_ID', False)
 except:
         MESSAGE = 'Manually set the Message if youre not running through heroku or have not set vars in ENV'
         TOKEN = 'Manually set the API Token if youre not running through heroku or have not set vars in ENV'
         UNFURL = 'FALSE'
 ###############################################################
 
+def is_team_join(msg):
+    return msg['type'] == "team_join"
+
+def is_debug_channel_join(msg):
+    return msg['type'] == "member_joined_channel" and msg['channel'] == DEBUG_CHANNEL_ID and msg['channel_type'] == 'C'
+
 def parse_join(message):
     m = json.loads(message)
-    if (m['type'] == "team_join"):
-        x = requests.get("https://slack.com/api/im.open?token="+TOKEN+"&user="+m["user"]["id"])
+    if is_team_join(m) or is_debug_channel_join(m):
+        user_id = m["user"]["id"] if is_team_join(m) else m["user"]
+        logging.debug(m)
+        x = requests.get("https://slack.com/api/im.open?token="+TOKEN+"&user="+user_id)
         x = x.json()
         x = x["channel"]["id"]
         logging.debug(x)
+
+        data = {
+                'token': TOKEN,
+                'channel': x,
+                'text': MESSAGE,
+                'parse': 'full',
+                'as_user': 'true',
+                }
+
+        logging.debug(data)
+
         if (UNFURL.lower() == "false"):
-          xx = requests.post("https://slack.com/api/chat.postMessage?token="+TOKEN+"&channel="+x+"&text="+urllib.quote(MESSAGE)+"&parse=full&as_user=true&unfurl_links=false")
-        else:
-          xx = requests.post("https://slack.com/api/chat.postMessage?token="+TOKEN+"&channel="+x+"&text="+urllib.quote(MESSAGE)+"&parse=full&as_user=true")
+          data = data.update({'unfurl_link': 'false'})
+
+        xx = requests.post("https://slack.com/api/chat.postMessage", data=data)
         logging.debug('\033[91m' + "HELLO SENT TO " + m["user"]["id"] + '\033[0m')
 
 #Connects to Slacks and initiates socket handshake
