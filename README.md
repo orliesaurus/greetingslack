@@ -43,3 +43,7 @@ After setting up the bot, your welcome message will be displayed to every new us
 Check the example below:
 
 ![Example](https://i.snag.gy/YyOLfb.jpg)
+
+## Q3. How do I enable the debug channel?
+A3.
+In the environment variables set DEBUG_CHANNEL_ID to be true. THat's usually achieved by using `export DEBUG_CHANNEL_ID=true`
