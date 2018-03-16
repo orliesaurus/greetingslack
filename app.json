@@ -9,16 +9,16 @@
   "website": "https://github.com/orliesaurus/greetingslack",
   "repository": "https://github.com/orliesaurus/greetingslack",
   "env": {
-    "SLACK-TOKEN": {
+    "SLACK_TOKEN": {
       "description": "Your Slack API Token",
       "value": "1234-12314123123-123123123",
       "required": "true"
     },
-    "UNFURL-LINKS": {
+    "UNFURL_LINKS": {
       "description": "We UNFURL only the last link by default, trust me its good",
       "value": "true"
     },
-    "WELCOME-MESSAGE": {
+    "WELCOME_MESSAGE": {
       "description": "Your Welcome message string",
       "value": "A personalized welcome msg that is broadcasted to your Slack Users"
     }
