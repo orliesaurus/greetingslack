@@ -19,7 +19,7 @@ try:
         MESSAGE = os.environ['WELCOME_MESSAGE']
         TOKEN = os.environ['SLACK_TOKEN']
         UNFURL = os.environ['UNFURL_LINKS']
-        DEBUG_CHANNEL_ID = os.environ.get('DEBUG_CHANNEL_ID', False)
+        DEBUG_CHANNEL_ID = os.environ.get('testing', true)
 except:
         MESSAGE = 'Manually set the Message if youre not running through heroku or have not set vars in ENV'
         TOKEN = 'Manually set the API Token if youre not running through heroku or have not set vars in ENV'
