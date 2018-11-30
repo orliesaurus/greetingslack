@@ -77,6 +77,7 @@ def parse_join(message):
     if is_direct_message(m):
         user_id = m["user"]
         user_message = m['text']
+        user_message = urllib.quote(user_message)
 
         # Need to get the display name from the user_id
         real_name = get_display_name(user_id)
@@ -86,8 +87,6 @@ def parse_join(message):
         response = real_name+'recently joined your team and responded with message\n> '+user_message
 
         requests.get("https://slack.com/api/chat.postMessage?token="+CHANNEL_TOKEN+"&channel="+RESPONSE_CHANNEL+"&text="+user_message+"&as_user=false&username="+real_name)
-
-# TODO: PARSE SPECIAL CHARACTERS IN USER MESSAGE
 
 #Connects to Slacks and initiates socket handshake
 def start_rtm():
