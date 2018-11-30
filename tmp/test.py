@@ -6,15 +6,19 @@ import os
 import sys
 import logging
 
-
-users = requests.get("https://slack.com/api/users.list?token=xoxp-22100655441-397633544705-471849303060-f6c3c8b32309a1a364e317e2b9b4cd3a")
-users = users.json()
-
 #for item in users['members']['profile']:
 #  print item
 
-userId = 'UDS50FRNU'
+def get_display_name(user_id):
+  print user_id
+  users = requests.get("https://slack.com/api/users.list?token="+TOKEN)
+  users = users.json()
 
-for item in users['members']:
-  if userId == item['id']:
-    print item['real_name']+'wants to kill you\n> fuck off'
+  for item in users['members']:
+    print item['id']
+    if item['id'] == user_id:
+      return item['real_name']
+
+
+uid = 'UEHT0GL14'
+print get_display_name(uid)

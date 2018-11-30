@@ -7,6 +7,7 @@ import sys
 import logging
 
 
+
 logging.basicConfig(level=logging.DEBUG,
         stream=sys.stdout)
 
@@ -18,7 +19,10 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 try:
         MESSAGE = os.environ['WELCOME_MESSAGE']
         TOKEN = os.environ['SLACK_TOKEN']
+        CHANNEL_TOKEN = os.environ['CHANNEL_TOKEN']
         UNFURL = os.environ['UNFURL_LINKS']
+	RESPONSE_CHANNEL = os.environ.get('RESPONSE_CHANNEL')
+        BOT_CHANNEL = os.environ.get('BOT_CHANNEL')
         DEBUG_CHANNEL_ID = os.environ.get('DEBUG_CHANNEL_ID', False)
 except:
         MESSAGE = 'Manually set the Message if youre not running through heroku or have not set vars in ENV'
@@ -31,6 +35,18 @@ def is_team_join(msg):
 
 def is_debug_channel_join(msg):
     return msg['type'] == "member_joined_channel" and msg['channel'] == DEBUG_CHANNEL_ID and msg['channel_type'] == 'C'
+
+def is_direct_message(msg): 
+    print msg
+    return msg['type'] == "message" and msg['channel'] == BOT_CHANNEL
+
+def get_display_name(user_id):
+    users = requests.get("https://slack.com/api/users.list?token="+TOKEN)
+    users = users.json()
+
+    for item in users['members']:
+        if user_id == item['id']:
+            return item['real_name']
 
 def parse_join(message):
     m = json.loads(message)
@@ -57,6 +73,21 @@ def parse_join(message):
 
         xx = requests.post("https://slack.com/api/chat.postMessage", data=data)
         logging.debug('\033[91m' + "HELLO SENT TO " + m["user"]["id"] + '\033[0m')
+
+    if is_direct_message(m):
+        user_id = m["user"]
+        user_message = m['text']
+
+        # Need to get the display name from the user_id
+        real_name = get_display_name(user_id)
+				
+        # Need to send a message to a channel
+
+        response = real_name+'recently joined your team and responded with message\n> '+user_message
+
+        requests.get("https://slack.com/api/chat.postMessage?token="+CHANNEL_TOKEN+"&channel="+RESPONSE_CHANNEL+"&text="+user_message+"&as_user=false&username="+real_name)
+
+# TODO: PARSE SPECIAL CHARACTERS IN USER MESSAGE
 
 #Connects to Slacks and initiates socket handshake
 def start_rtm():
