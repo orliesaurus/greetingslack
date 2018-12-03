@@ -37,7 +37,10 @@ def is_debug_channel_join(msg):
 
 def is_direct_message(msg): 
     print msg
-    return msg['type'] == "message" and msg['channel'][0] == 'D'
+    is_bot = False
+    if 'bot_id' in msg:
+        is_bot = True
+    return msg['type'] == "message" and msg['channel'][0] == 'D' and not is_bot
 
 def get_display_name(user_id):
     logging.debug('FINDING USER WITH ID'+user_id)
