@@ -22,7 +22,6 @@ try:
         CHANNEL_TOKEN = os.environ['CHANNEL_TOKEN']
         UNFURL = os.environ['UNFURL_LINKS']
 	RESPONSE_CHANNEL = os.environ.get('RESPONSE_CHANNEL')
-        BOT_CHANNEL = os.environ.get('BOT_CHANNEL')
         DEBUG_CHANNEL_ID = os.environ.get('DEBUG_CHANNEL_ID', False)
 except:
         MESSAGE = 'Manually set the Message if youre not running through heroku or have not set vars in ENV'
@@ -57,7 +56,6 @@ def parse_join(message):
         x = requests.get("https://slack.com/api/im.open?token="+TOKEN+"&user="+user_id)
         x = x.json()
         x = x["channel"]["id"]
-        print x
         logging.debug(x)
 
         data = {
