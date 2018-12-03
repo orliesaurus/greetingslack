@@ -38,9 +38,10 @@ def is_debug_channel_join(msg):
 
 def is_direct_message(msg): 
     print msg
-    return msg['type'] == "message" and msg['channel'] == BOT_CHANNEL
+    return msg['type'] == "message" and msg['channel'][0] == 'D'
 
 def get_display_name(user_id):
+    logging.debug('FINDING USER WITH ID'+user_id)
     users = requests.get("https://slack.com/api/users.list?token="+TOKEN)
     users = users.json()
 
@@ -56,6 +57,7 @@ def parse_join(message):
         x = requests.get("https://slack.com/api/im.open?token="+TOKEN+"&user="+user_id)
         x = x.json()
         x = x["channel"]["id"]
+        print x
         logging.debug(x)
 
         data = {
@@ -75,6 +77,7 @@ def parse_join(message):
         logging.debug('\033[91m' + "HELLO SENT TO " + m["user"]["id"] + '\033[0m')
 
     if is_direct_message(m):
+        logging.debug('DM RECEIVED')
         user_id = m["user"]
         user_message = m['text']
         user_message = urllib.quote(user_message)
@@ -82,14 +85,13 @@ def parse_join(message):
         # Need to get the display name from the user_id
         real_name = get_display_name(user_id)
 				
+        #logging.DEBUG('SENDING MESSAGE: '+user_message+' TO USER '+real_name)
         # Need to send a message to a channel
-
-        response = real_name+'recently joined your team and responded with message\n> '+user_message
-
         requests.get("https://slack.com/api/chat.postMessage?token="+CHANNEL_TOKEN+"&channel="+RESPONSE_CHANNEL+"&text="+user_message+"&as_user=false&username="+real_name)
 
 #Connects to Slacks and initiates socket handshake
 def start_rtm():
+    
     r = requests.get("https://slack.com/api/rtm.start?token="+TOKEN, verify=False)
     r = r.json()
     logging.info(r)
@@ -114,4 +116,3 @@ if __name__ == "__main__":
     ws = websocket.WebSocketApp(r, on_message = on_message, on_error = on_error, on_close = on_close)
     #ws.on_open
     ws.run_forever()
-
