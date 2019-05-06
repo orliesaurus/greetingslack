@@ -17,10 +17,10 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 ###VARIABLES THAT YOU NEED TO SET MANUALLY IF NOT ON HEROKU#####
 try:
-        MESSAGE = os.environ['WELCOME_MESSAGE']
-        TOKEN = os.environ['SLACK_TOKEN']
-        CHANNEL_TOKEN = os.environ['CHANNEL_TOKEN']
-        UNFURL = os.environ['UNFURL_LINKS']
+        MESSAGE = os.environ.get('WELCOME_MESSAGE')
+        TOKEN = os.environ.get('SLACK_TOKEN')
+        CHANNEL_TOKEN = os.environ.get('CHANNEL_TOKEN')
+        UNFURL = os.environ.get('UNFURL_LINKS')
 	RESPONSE_CHANNEL = os.environ.get('RESPONSE_CHANNEL')
         DEBUG_CHANNEL_ID = os.environ.get('DEBUG_CHANNEL_ID', False)
 except:
