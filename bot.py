@@ -98,9 +98,7 @@ def parse_join(message):
 
 # Connects to Slacks and initiates socket handshake
 
-
 def start_rtm():
-
     r = requests.get(
         "https://slack.com/api/rtm.start?token="+TOKEN, verify=False)
     r = r.json()
