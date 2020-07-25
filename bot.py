@@ -91,7 +91,7 @@ def parse_join(message):
         # Need to get the display name from the user_id
         real_name = get_display_name(user_id)
 
-        logging.DEBUG('SENDING MESSAGE: '+user_message+' TO USER '+real_name)
+        logging.debug('SENDING MESSAGE: '+user_message+' TO USER '+real_name)
         # Need to send a message to a channel
         if CHANNEL_TOKEN and RESPONSE_CHANNEL:
             requests.get("https://slack.com/api/chat.postMessage?token="+CHANNEL_TOKEN+"&channel=" +
