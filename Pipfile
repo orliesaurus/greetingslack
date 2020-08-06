@@ -4,11 +4,13 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pylint = "*"
+autopep8 = "*"
 
 [packages]
-requests = "*"
-websocket-client = "*"
-six = "*"
+slackclient = "*"
+slackeventsapi = "*"
+certifi = "*"
 
 [requires]
 python_version = "3.8"
