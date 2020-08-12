@@ -6,8 +6,8 @@
     "Slack",
     "bot"
   ],
-  "website": "https://github.com/orliesaurus/greetingslack",
-  "repository": "https://github.com/orliesaurus/greetingslack",
+  "website": "https://github.com/spscommerce/greetingslack",
+  "repository": "https://github.com/spscommerce/greetingslack",
   "env": {
     "SLACK_TOKEN": {
       "description": "Your Slack API Token",
