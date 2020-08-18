@@ -6,12 +6,12 @@
     "Slack",
     "bot"
   ],
-  "website": "https://github.com/spscommerce/greetingslack",
-  "repository": "https://github.com/spscommerce/greetingslack",
+  "website": "https://github.com/orliesaurus/greetingslack",
+  "repository": "https://github.com/orliesaurus/greetingslack",
   "env": {
     "SLACK_TOKEN": {
       "description": "Your Slack API Token",
-      "value": "1234-12314123123-123123123",
+      "value": "iuo3fufXhnFMI89ODqKP66H7",
       "required": "true"
     },
     "UNFURL_LINKS": {
