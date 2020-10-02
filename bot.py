@@ -35,7 +35,7 @@ def is_team_join(msg):
 def is_debug_channel_join(msg):
     return msg['type'] == "member_joined_channel" and msg['channel'] == DEBUG_CHANNEL_ID and msg['channel_type'] == 'C'
 
-def is_direct_message(msg): 
+def is_direct_message(msg):
     print(msg)
     is_bot = False
     if 'bot_id' in msg:
@@ -56,7 +56,7 @@ def parse_join(message):
     if is_team_join(m) or is_debug_channel_join(m):
         user_id = m["user"]["id"] if is_team_join(m) else m["user"]
         logging.debug(m)
-        conversation = requests.post("https://slack.com/api/conversations.open?token=" + TOKEN + "&users=" + "UL5JGPBC2",
+        conversation = requests.post("https://slack.com/api/conversations.open?token=" + TOKEN + "&users=" + user_id,
                           data=None).json()
         conversation_channel = conversation["channel"]["id"]
         logging.debug(conversation_channel)
@@ -85,14 +85,14 @@ def parse_join(message):
 
         # Need to get the display name from the user_id
         real_name = get_display_name(user_id)
-				
+
         #logging.DEBUG('SENDING MESSAGE: '+user_message+' TO USER '+real_name)
         # Need to send a message to a channel
         requests.get("https://slack.com/api/chat.postMessage?token="+CHANNEL_TOKEN+"&channel="+RESPONSE_CHANNEL+"&text="+user_message+"&as_user=false&username="+real_name)
 
 #Connects to Slacks and initiates socket handshake
 def start_rtm():
-    
+
     r = requests.get("https://slack.com/api/rtm.start?token="+TOKEN, verify=False)
     r = r.json()
     logging.info(r)
