@@ -10,7 +10,7 @@ If you have questions open an `Issue` (preferred) or reply to the tutorial artic
 
 # Requirements
 Python 2.7+
-Edit `bot.py` on lines 7-8 to customise with your greeting and token
+Edit `bot.py` on lines 27-29 to customise with your greeting and token
 
 # Installation
 ```bash
