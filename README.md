@@ -9,17 +9,38 @@ If you like this project and you use it for your community or anything else, ple
 If you have questions open an `Issue` (preferred) or reply to the tutorial article
 
 # Requirements
-Python 2.7+
-Edit `bot.py` on lines 27-29 to customise with your greeting and token
+Python 2.7+.
+
+Edit `bot.py` on lines 26-28 to customise with your greeting and token
 
 # Installation
-```bash
-git clone <thisgitrepo>
-cd <thisgitrepo>
+
+### Clone the repository
+
+```
+git clone https://github.com/orliesaurus/greetingslack.git
+cd greetingslack
+```
+
+### Virtual Environment Setup
+
+#### Python 2.7
+```
 virtualenv greetingslack
+```
+#### Python 3
+```
+python -m venv greetingslack
+```
+
+### Install requirements
+```bash
 . greetingslack/bin/activate
-pip install requests
-pip install websocket-client
+pip install -r requirements.txt
+```
+### Run 
+
+```
 python bot.py &
 ```
 
